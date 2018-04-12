@@ -1,0 +1,65 @@
+[
+  {
+    "carID": 1,
+    "engine_size": 6,
+    "fuel_type": "Petrol",
+    "make": "Hummer",
+    "model": "H2",
+    "price_per_day": 450,
+    "top_speed": 159
+  },
+  {
+    "carID": 2,
+    "engine_size": 6,
+    "fuel_type": "Petrol",
+    "make": "Aston Martin",
+    "model": "DB9",
+    "price_per_day": 1200,
+    "top_speed": 300
+  },
+  {
+    "carID": 3,
+    "engine_size": 6.75,
+    "fuel_type": "Petrol",
+    "make": "Rolls Royce",
+    "model": "Phantom Drophead",
+    "price_per_day": 2500,
+    "top_speed": 240
+  },
+  {
+    "carID": 4,
+    "engine_size": 5,
+    "fuel_type": "Petrol",
+    "make": "Lamborghini",
+    "model": "Gallardo Spyder",
+    "price_per_day": 1700,
+    "top_speed": 309
+  },
+  {
+    "carID": 5,
+    "engine_size": 5.5,
+    "fuel_type": "Petrol",
+    "make": "Mercedes Benz",
+    "model": "SLR McLaren",
+    "price_per_day": 995,
+    "top_speed": 333
+  },
+  {
+    "carID": 6,
+    "engine_size": 4.2,
+    "fuel_type": "Petrol",
+    "make": "Jaguar",
+    "model": "XKR",
+    "price_per_day": 498,
+    "top_speed": 249
+  },
+  {
+    "carID": 42,
+    "engine_size": 6,
+    "fuel_type": "Blood",
+    "make": "Wagon",
+    "model": "Demonic",
+    "price_per_day": 666,
+    "top_speed": 666
+  }
+]

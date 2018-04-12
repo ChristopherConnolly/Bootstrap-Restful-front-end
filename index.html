@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<head>
+  <title>
+    Elite Cars!!!
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--This calls a Google Web Font - used for the main title -->
+  <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One" rel="stylesheet">
+
+  <!--This calls the actual CSS file-->
+  <link href="css/styles.css" rel="stylesheet">
+
+  <!--This calls the JQuery library-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+  <script language="JavaScript" type="text/javascript" src="js/editrest.js"></script>
+
+
+
+  <!-- This calls datatables.js minimised -->
+  <script language="JavaScript" type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">  </script>
+
+  <!--This calls Datatables CSS-->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+  <!--This calls the restful elements of the javascript-->
+  <!--  <script language="JavaScript" type="text/javascript" src="js/main.js"></script> -->
+  <!--Bootstrap CSS-->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!--fooTable-->
+  <script anguage="JavaScript" type="text/javascript" src="./js/footable.js"></script>
+  <link rel="stylesheet" href="./css/footable.bootstrap.min.css">
+  <style>
+
+  /* Adds borders for tabs */
+  .tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+  }
+  .nav-tabs {
+    margin-bottom: 0;
+  }
+
+  .affix {
+    top: 0;
+    width: 100%;
+  }
+
+  .affix + .container-fluid {
+    padding-top: 70px;
+  }
+  </style>
+
+</head>
+
+
+<!--******BODY***********-->
+<body>
+  <!--These divs centre the page using bootstrap-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
+        <!--*****HEADER**********-->
+        <header>
+
+
+
+          <!-- Navigation Buttons-->
+          <nav class="navbar navbar-default" >
+
+            <div class="container-fluid col-lg-8 col-md-8 col-sm-10 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
+              <img class="logo" alt="Elite Cars Welcome Image" src="pics/logo1.png" height="160px" width="350px">
+
+
+
+              <ul class="nav nav-tabs" data-spy="affix" data-offset-top="158">
+                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li><a data-toggle="tab" href="#cars">Cars</a></li>
+                <li><a data-toggle="tab" href="#customers">Customers</a></li>
+                <li><a data-toggle="tab" href="#bookings">Bookings</a></li>
+                <li><a data-toggle="tab" href="#edit">Edit</a></li>
+              </ul>
+
+            </div>
+
+          </nav>
+
+          <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+              <h3>HOME</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div id="cars" class="tab-pane fade">
+              <h3>Our Cars</h3>
+              <p></p>
+              <table id="carstable" class="carstable" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Car ID Number</th>
+                    <th>Engine (CCs)</th>
+                    <th>Fuel</th>
+                    <th>Manufacturer</th>
+                    <th>Model</th>
+                    <th>Price Per Day</th>
+                    <th>Maximum Speed</th>
+                  </tr>
+                </thead>
+              </table>
+
+
+
+              <ul id="cars">
+                <script>
+                var carURL = "http://192.168.1.53:9080/ELITEREST/api/car";
+                var carsJSON = $.ajax({url : carURL, async : 0});
+                var carsJSONclear = carsJSON.responseJSON;
+
+                //        alert(carsJSONclear);
+                $('#carstable').DataTable( {
+                  data: carsJSONclear,
+                  dataType : JSON,
+                  "columns": [
+                    { "data": "carID" },
+                    { "data": "engine_size" },
+                    { "data": "fuel_type" },
+                    { "data": "make" },
+                    { "data": "model" },
+                    { "data": "price_per_day" },
+                    { "data": "top_speed" }
+                  ]
+                });
+
+                </script>
+
+              </div>
+
+
+
+              <!---->
+              <div id="customers" class="tab-pane fade">
+                <h3>Customers</h3>
+                <table id="customerstable" class="customerstable" cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Password</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Address</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Gender</th>
+                      <th>Date of Birth</th>
+                    </tr>
+                  </thead>
+                </table>
+
+
+                <script>
+                var customerURL = "http://192.168.1.53:9080/ELITEREST/api/customer";
+                var customerJSON = $.ajax({url : customerURL, async : 0});
+                var customerJSONclear = customerJSON.responseJSON;
+
+                //      alert(customerJSONclear);
+                $('#customerstable').DataTable( {
+                  data: customerJSONclear,
+                  dataType : JSON,
+                  "columns": [
+                    { "data": "customer_id" },
+                    { "data": "userPassword" },
+                    { "data": "firstname" },
+                    { "data": "lastName" },
+                    { "data": "address" },
+                    { "data": "email" },
+                    { "data": "phoneNo" },
+                    { "data": "gender" },
+                    { "data": "DOB" }
+                  ]
+                });
+
+                </script>
+              </div>
+              <!---->
+              <div id="bookings" class="tab-pane fade">
+                <h3>Bookings</h3>
+                <p>A table showing bookings goes here</p>
+                <table id="bookingtable" class="bookingtable" cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th>Booking ID</th>
+                      <th>Car Number</th>
+                      <th>Customer Number</th>
+                      <th><date>Pickup Date</date></th>
+                      <th>Dropoff Date</th>
+                      <th>Booking Date</th>
+                    </tr>
+                  </thead>
+                </table>
+
+
+                <script>
+                var bookingURL = "http://192.168.1.53:9080/ELITEREST/api/booking";
+                var bookingJSON = $.ajax({url : bookingURL, async : 0});
+                var bookingJSONclear = bookingJSON.responseJSON;
+
+                //      alert(customerJSONclear);
+                $('#bookingtable').DataTable( {
+                  data: bookingJSONclear,
+                  dataType : JSON,
+                  "columns": [
+                    { "data": "bookingID" },
+                    { "data": "carID" },
+                    { "data": "customer_id" },
+                    { "data": "pickupDate" },
+                    { "data": "dropOffDate" },
+                    { "data": "bookingDate" }
+                  ]
+                });
+
+                </script>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <!---->
+              <div id="edit" class="tab-pane fade">
+                <h3>EDIT SYSTEM</h3>
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown" id="editingmenu" type="button" data-toggle="dropdown">EDIT:
+                  </button>
+                  <ul class="dropdown-menu" role="editmenu" aria-labelledby="Edit Menu">
+                    <li role="presentation"><a data-toggle="collapse" href="#editcars">Cars</a></li>
+                    <li role="presentation"><a data-toggle="collapse" href="#editcustomers">Customers</a></li>
+                    <li role="presentation"><a data-toggle="collapse" href="#editbookings">Bookings</a></li>
+                  </ul>
+                </div>
+
+
+
+
+
+                <!--EDIT CARS-->
+
+
+                <div id="editcars" class="collapse">
+                  List for cars
+
+                  <div class="carsheader">
+                    <input type="text" id="searchKey"/>
+                    <button id="carBtnSearch">Search Cars</button>
+                    <button id="carBtnAdd">New Car</button>
+                  </div>
+
+
+                  <div class="carLeftArea">
+                    <ul id="carList"></ul>
+                  </div>
+
+                  <form id="carForm">
+
+                    <div class="carMainArea">
+
+                      <label>CarID:</label>
+                      <input id="CarId" name="carId" type="text" disabled />
+
+                      <label>Make:</label>
+                      <input type="text" id="make" required>
+
+                      <label>Model:</label>
+                      <input type="text" id="model" name="model"/>
+
+                      <label>Fuel Type:</label>
+                      <input type="text" id="fuel_type" name="fuel_type"/>
+
+                      <label>Engine Size (CC):</label>
+                      <input type="text" id="engine_size" name="engine_size"/>
+
+                      <label>Top Speed:</label>
+                      <input type="text" id="top_speed" name="top_speed"/>
+
+                      <label>Price Per Day:</label>
+                      <input type="text" id="price_per_day" name="price_per_day"/>
+
+                      <button id="carBtnSave">Save Car</button>
+                      <button id="carBtnDelete">Delete Car</button>
+
+                    </div>
+
+                    <!--<div class="rightArea">
+
+                    <img id="pic" height="300"/>
+
+                    <label>Notes:</label>
+                    <textarea id="description" name="description"></textarea>
+                  </div>-->
+
+                </form>
+                                <hr width="80%" align="center" color="blue" width="5px">
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Submit</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Submitted</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Response Code Returned:</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+                <!--EDIT CUSTOMERS-->
+
+
+                <div id="editcustomers" class="collapse">
+
+
+                  <div class="customersheader">
+                    <input type="text" id="searchKey"/>
+                    <button id="customerBtnSearch">Search</button>
+                    <button id="customerBtnAdd">New Customer</button>
+                  </div>
+
+
+                  <div class="customerLeftArea">
+                    <ul id="customerList"></ul>
+                  </div>
+
+                  <form id="customerForm">
+
+                    <div class="customerMainArea">
+
+                      <label>Customer ID:</label>
+                      <input id="customer_id" name="customer_id" type="text" disabled />
+
+                      <label>User Name:</label>
+                      <input type="text" id="userName" required>
+
+                      <label>User Password:</label>
+                      <input type="text" id="userPassword" name="userPassword"/>
+
+                      <label>First Name:</label>
+                      <input type="text" id="firstName" name="firstName"/>
+
+                      <label>Last Name:</label>
+                      <input type="text" id="lastName" name="lastName"/>
+
+                      <label>Address:</label>
+                      <input type="text" id="address" name="address"/>
+
+                      <label>Email Address:</label>
+                      <input type="text" id="email" name="email"/>
+
+                      <label>Phone Number:</label>
+                      <input type="text" id="phoneNo" name="phoneNo"/>
+
+                      <label>Gender:</label>
+                      <input type="text" id="gender" name="gender"/>
+
+                      <label>Date Of Birth:</label>
+                      <input type="text" id="DOB" name="DOB"/>
+
+                      <button id="customersBtnSave">Save Customer</button>
+                      <button id="customersBtnDelete">Delete Customer</button>
+
+                    </div>
+
+                    <!--<div class="rightArea">
+
+                    <img id="pic" height="300"/>
+
+                    <label>Notes:</label>
+                    <textarea id="description" name="description"></textarea>
+                  </div>-->
+
+                </form>
+                <hr width="80%" align="center" color="blue">
+</div>
+
+
+
+
+              <!--EDIT BOOKINGS-->
+
+              <div id="editbookings" class="collapse">
+                List for bookings
+
+                  <div class="bookingheader">
+                    <input type="text" id="searchKey"/>
+                    <button id="bookingBtnSearch">Search</button>
+                    <button id="bookingBtnAdd">New Booking</button>
+                  </div>
+
+
+                  <div class="bookingLeftArea">
+                    <ul id="bookingList"></ul>
+                  </div>
+
+                  <form id="bookingForm">
+
+                    <div class="bookingMainArea">
+
+                      <label>Booking ID:</label>
+                      <input id="bookingID" name="bookingID" type="text" disabled />
+
+                      <label>Car ID:</label>
+                      <input type="text" id="booking_carID" required>
+
+                      <label>Customer ID:</label>
+                      <input type="text" id="booking_customerID"/>
+
+                      <label>Pick Up Date:</label>
+                      <input type="text" id="pickupDate" name="pickupDate"/>
+
+                      <label>Drop Off Date:</label>
+                      <input type="text" id="DropOffDate" name="DropOffDate"/>
+
+                      <label>Booking Date:</label>
+                      <input type="text" id="BookingDate" name="BookingDate"/>
+
+                      <button id="bookingBtnSave">Save Booking</button>
+                      <button id="bookingBtnDelete">Delete Booking</button>
+
+                    </div>
+                <hr width="80%" align="center" color="blue">
+                    <!--<div class="rightArea">
+
+                    <img id="pic" height="300"/>
+
+                    <label>Notes:</label>
+                    <textarea id="description" name="description"></textarea>
+                  </div>-->
+
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+        <!---END OF HEADER-->
+      </header>
+
+
+
+
+
+
+
+
+
+
+      <footer>
+        <hr color="blue" width=90%>
+        &copy;
+        <script type="text/javascript">var year = new Date();document.write(year.getFullYear());</script>
+        &shy; Elite Cars Limited
+      </footer>
+
+      <!-- wine stuff
+      <div class="leftArea">
+      <ul id="wineList"></ul>
+    </div>
+    <input type="text" id="searchKey">
+    <button id="btnSearch">Search</button>
+    <button id="btnAdd">New Car</button>
+    <form id="wineForm">
+
+    <div class="mainArea">
+
+    <label>Id:</label>
+    <input id="wineId" name="id" type="text" disabled>
+
+
+    <label>Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label>Grapes:</label>
+    <input type="text" id="grapes" name="grapes"/>
+
+    <label>Country:</label>
+    <input type="text" id="country" name="country"/>
+
+    <label>Region:</label>
+    <input type="text" id="region" name="region"/>
+
+    <label>Year:</label>
+    <input type="text" id="year" name="year"/>
+
+    <button id="btnSave">Save</button>
+    <button id="btnDelete">Delete</button>
+
+  </div>
+
+  <div class="rightArea">
+
+  <img id="pic" height="300"/>
+
+  <label>Notes:</label>
+  <textarea id="description" name="description"></textarea>
+</div>
+
+</form>
+-->
+
+</div>
+</div>
+</body>
+</html>
